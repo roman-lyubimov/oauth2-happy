@@ -1,0 +1,27 @@
+{
+  "name": "oauth2-happy",
+  "version": "0.0.1",
+  "description": "Yet another oauth2 client",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roman-lyubimov/oauth2-happy.git"
+  },
+  "keywords": [],
+  "author": "Roman Lyubimov <raman.liubimau@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roman-lyubimov/oauth2-happy/issues"
+  },
+  "homepage": "https://github.com/roman-lyubimov/oauth2-happy#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "typescript": "^2.9.2"
+  }
+}
