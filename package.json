@@ -1,6 +1,6 @@
 {
   "name": "oauth2-happy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yet another oauth2 client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
