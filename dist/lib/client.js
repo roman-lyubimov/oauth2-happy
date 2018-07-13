@@ -91,7 +91,8 @@ class Client {
                 throw new Error('Server response missing access_token');
             }
             const refreshToken = response['refresh_token'] || v.refresh_token;
-            return new token_1.Token(response['access_token'], response['token_type'], refreshToken, response['expires_in']);
+            const expiresIn = parseInt(response['expires_in']);
+            return new token_1.Token(response['access_token'], response['token_type'], refreshToken, expiresIn);
         }, (error) => {
             if (error instanceof SyntaxError) {
                 throw new Error('Server response invalid payload');

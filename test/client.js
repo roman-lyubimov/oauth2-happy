@@ -258,6 +258,25 @@ describe('Client', () => {
       }
     };
 
+    const successExpiresIsStringResponse = {
+      ok: true,
+      status: 200,
+      statusText: 'OK',
+      headers: {
+        get(name) {
+          return name === 'Content-Type' ? 'application/json' : null;
+        }
+      },
+      json() {
+        return Promise.resolve({
+          access_token: 'accesstoken',
+          token_type: 'bearer',
+          expires_in: '3600',
+          refresh_token: 'refreshtoken'
+        })
+      }
+    };
+
     const successInvalidPayloadResponse = {
       ok: true,
       status: 200,
@@ -590,6 +609,22 @@ describe('Client', () => {
       client.retrieveToken({ }).catch((error) => {
         expect(error).to.be.an.instanceof(Error);
         expect(error.message).to.be.equal('Cannot fetch token: Bad Request; Response: {error=invalid_grant');
+        done();
+      });
+    });
+
+    it('should convert expires_in to number', (done) => {
+      const fetch = sinon.fake.resolves(successExpiresIsStringResponse);
+
+      const client = new Client({
+        clientId: '12345',
+        endpoint: {
+          tokenUrl: 'https://example.com/oauth2/token'
+        }
+      }, fetch);
+
+      client.retrieveToken({ }).then((token) => {
+        expect(typeof token.expiresIn).to.be.equal('number');
         done();
       });
     });
