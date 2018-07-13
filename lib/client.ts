@@ -111,8 +111,9 @@ export class Client {
       }
 
       const refreshToken = response['refresh_token'] || v.refresh_token;
+      const expiresIn = parseInt(response['expires_in']);
 
-      return new Token(response['access_token'], response['token_type'], refreshToken, response['expires_in']);
+      return new Token(response['access_token'], response['token_type'], refreshToken, expiresIn);
     }, (error) => {
       if (error instanceof SyntaxError) {
         throw new Error('Server response invalid payload');
